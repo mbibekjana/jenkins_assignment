@@ -27,8 +27,8 @@ pipeline {
     stage('Pushing to ECR') {
         steps{
             script {
-                sh 'sudo docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment '
-                sh 'sudo docker push 402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment'
+                sh 'docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment '
+                sh 'docker push 402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment'
             }
         }
     }
@@ -42,7 +42,7 @@ pipeline {
 
              }
                 //sh 'ssh -i /login/assignment-c7key.pem ubuntu@10.0.2.129'
-                sh 'sudo docker run -d -p 8081:8080 --rm --name node 402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment'
+                sh 'docker run -d -p 8081:8080 --rm --name node 402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment'
             }
       }
     }
