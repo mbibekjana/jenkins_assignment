@@ -37,12 +37,8 @@ pipeline {
      steps{
          script {
              sshagent(credentials : ['upgrad']){
-                sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@10.0.2.121
-                    docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment
-                    docker pull 402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment:latest
-                    docker run -d -p 8081:8080 --rm --name node 402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment
-                '''
+               sh "echo pwd"
+                sh 'ssh -t -t ubuntu@10.0.2.121 -o StrictHostKeyChecking=no "echo pwd && sudo -i -u root && cd /opt/docker/web && echo pwd"'
 
              }
                 
