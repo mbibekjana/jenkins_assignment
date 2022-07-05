@@ -36,7 +36,7 @@ pipeline {
     stage('Docker Run') {
      steps{
          script {
-             sshagent(credentials : ['aws_ec2']){
+             sshagent(credentials : ['upgrad']){
 
                 sh 'ssh -o StrictHostKeyChecking=no -i bibek_ipgrad.pem ubuntu@10.0.2.121'
 
