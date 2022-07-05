@@ -33,7 +33,7 @@ pipeline {
         }
     }
 
-    stage('Docker Run') {
+    stage('Docker Deploy') {
      steps{
          script {
              sshagent(credentials : ['upgrad']){
