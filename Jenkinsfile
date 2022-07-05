@@ -5,21 +5,19 @@ pipeline {
     environment {
         registry = "402521938984.dkr.ecr.us-east-1.amazonaws.com/assignment"
     }
-
+    
     stages {
         stage('Cloning Git') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/mbibekjana/jenkins_assignment.git']]])
             }
         }
-    stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
     // Building Docker images
     stage('Building image') {
       steps{
         script {
+          def dockerHome = tool 'docker'
+          env.PATH = "${dockerHome}/bin:${env.PATH}"
           dockerImage = docker.build registry
         }
       }
